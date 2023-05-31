@@ -1,0 +1,31 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<form method="post" asp-antiforgery="true" asp-page-handler="Save" data-ajax="true" data-ajax-method="post">
+
+    
+    <label>Title: </label><input id="title" name=formData.Title type="text" required /><br />
+    <label>Name: </label><input id="name" name=formData.Name type="text" required /><br />
+
+    <label>Subject</label>
+    <ejs-treegrid id="subjectTreeGrid" height="300" childMapping="Children"
+                  treeColumnIndex="0" dataSource="@Model.SubjectLevelData" allowTextWrap=true>
+
+        <e-treegrid-columns>
+            <e-treegrid-column field="Title" headerText="Subject" showCheckbox=true></e-treegrid-column>
+        </e-treegrid-columns>
+
+    </ejs-treegrid>
+
+    <!-- 
+        I want to do data binding for tree grid the same as how I did for Title and Name.
+        You can test it out by pressing the save button and putting a breakpoint at OnPostSaveAsync function. 
+        The data for Title and Name will be included in the input parameter object at that function.
+    -->
+
+    <button id="savebtn" type="submit">Save</button>
+
+</form>
